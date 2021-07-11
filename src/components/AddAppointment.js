@@ -7,7 +7,8 @@ const AddAppointment = ({ onSendAppointment, lastId }) => {
     petName: '',
     aptDate: '',
     aptTime: '',
-    aptNotes: ''
+    aptNotes: '',
+    ownerName1:''
   }
   let [toggleForm, setToggleForm] = useState(false)
   let [formData, setFormData] = useState(clearData)
@@ -18,7 +19,8 @@ const AddAppointment = ({ onSendAppointment, lastId }) => {
       ownerName: formData.ownerName,
       petName: formData.petName,
       aptDate: formData.aptDate + ' ' + formData.aptTime,
-      aptNotes: formData.aptNotes
+      aptNotes: formData.aptNotes,
+      ownerName1: formData.ownerName1
     }
     onSendAppointment(appointmentInfo);
     setFormData(clearData);
@@ -91,14 +93,27 @@ const AddAppointment = ({ onSendAppointment, lastId }) => {
               <textarea id="aptNotes" name="aptNotes" rows="3"
                 onChange={(event) => { setFormData({ ...formData, aptNotes: event.target.value }) }}
                 value={formData.aptNotes}
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Detailed comments about the condition"></textarea>
+                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Tình trạng cụ thể"></textarea>
+            </div>
+          </div>
+
+          <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
+            <label htmlFor="ownerName1" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-3">
+              Owner Name1
+          </label>
+            <div className="mt-1 sm:mt-0 sm:col-span-2">
+              <input type="text" name="ownerName1" id="ownerName1"
+                onChange={(event) => { setFormData({ ...formData, ownerName1: event.target.value });
+              }}
+                value={formData.ownerName1}
+                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
             </div>
           </div>
 
           <div className="pt-5">
             <div className="flex justify-end">
               <button type="submit" onClick={formDataPublish} className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400">
-                Submit
+                Thêm vào
             </button>
             </div>
           </div>

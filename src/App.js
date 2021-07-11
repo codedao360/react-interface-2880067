@@ -1,9 +1,21 @@
 import { useState, useEffect, useCallback } from 'react'
 import { BiCalendar } from "react-icons/bi"
+import { GrSchedule } from "react-icons/gr";
 import Search from "./components/Search"
 import AddAppointment from "./components/AddAppointment"
 import AppointmentInfo from "./components/AppointmentInfo"
 
+// Confirm delete or not 
+function ConfirmDelete()
+{
+  var x = confirm("Are you sure you want to delete?");
+  if (x)
+      return true;
+  else
+    return false;
+}
+
+// Tung end
 function App() {
 
   let [appointmentList, setAppointmentList] = useState([]);
@@ -42,7 +54,7 @@ function App() {
   return (
     <div className="App container mx-auto mt-3 font-thin">
       <h1 className="text-5xl mb-3">
-        <BiCalendar className="inline-block text-red-400 align-top" />Your Appointments</h1>
+        <GrSchedule className="inline-block text-red-400 align-top" />Your Appointments</h1>
       <AddAppointment
         onSendAppointment={myAppointment => setAppointmentList([...appointmentList, myAppointment])}
         lastId={appointmentList.reduce((max, item) => Number(item.id) > max ? Number(item.id) : max, 0)}
@@ -60,10 +72,10 @@ function App() {
           .map(appointment => (
             <AppointmentInfo key={appointment.id}
               appointment={appointment}
-              onDeleteAppointment={
+              onDeleteAppointment={ConfirmDelete()?
                 appointmentId =>
                   setAppointmentList(appointmentList.filter(appointment =>
-                    appointment.id !== appointmentId))
+                    appointment.id !== appointmentId)):console.log('Khong xoa')
               }
             />
           ))
